@@ -56,8 +56,8 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer(options =>
-    {   
-        
+    {
+
         //Teszt ahhoz hogy megfelelõ e a hash!
         /*
         var secretKey = "8[=5WQ#vDCA[g@p$YyFVYXEqm7*x)mS6";
@@ -65,7 +65,7 @@ builder.Services.AddAuthentication("Bearer")
         Console.WriteLine($"Secret Key Base64: {Convert.ToBase64String(Encoding.UTF8.GetBytes(secretKey))}");
         */
 
-
+        var secretKey = builder.Configuration["JwtSettings:Secret"];
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = false,
@@ -77,6 +77,21 @@ builder.Services.AddAuthentication("Bearer")
     });
 builder.Services.AddAuthorization();
 
+//ez kell majd ahhoz hogy menjen a fetchelés a Svelte felé, utána még lentebb is van egy sor!
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        policy =>
+        {
+            policy.AllowAnyOrigin()
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+        });
+});
+
+
+
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -84,6 +99,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("AllowAll");
 
 app.UseAuthentication();
 app.UseAuthorization();
