@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kQXCF9Xd7H8=",
+  "dgSpecHash": "w+rC/y6+faQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\pc\\source\\repos\\Employee-Attendance-Api\\Employee Attendance Api.csproj",
+  "projectFilePath": "C:\\Users\\pc\\source\\repos\\Employee Attendance Api\\Employee Attendance Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\pc\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\pc\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

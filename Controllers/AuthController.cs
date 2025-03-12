@@ -44,7 +44,14 @@ namespace Employee_Attendance_Api.Controllers
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            return Ok(new { Token = tokenHandler.WriteToken(token) });
+
+            return Ok(new 
+            { 
+                Token = tokenHandler.WriteToken(token), 
+                IsAdmin = dolgozo.IsAdmin
+            
+            
+            });
         }
     }
 }
