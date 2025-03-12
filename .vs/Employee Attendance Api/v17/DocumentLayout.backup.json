@@ -46,8 +46,7 @@
               "RelativeToolTip": "Controllers\\AuthController.cs",
               "ViewState": "AgIAABEAAAAAAAAAAAAAwB0AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T14:31:43.921Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-11T14:31:43.921Z"
             },
             {
               "$type": "Document",
@@ -59,8 +58,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAFEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-07T09:33:47.509Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-07T09:33:47.509Z"
             },
             {
               "$type": "Document",
@@ -72,8 +70,7 @@
               "RelativeToolTip": "Models\\Dolgozo.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T14:27:56.158Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-11T14:27:56.158Z"
             },
             {
               "$type": "Document",
@@ -81,9 +78,9 @@
               "Title": "AdminController.cs",
               "DocumentMoniker": "C:\\Users\\pc\\source\\repos\\Employee Attendance Api\\Controllers\\AdminController.cs",
               "RelativeDocumentMoniker": "Controllers\\AdminController.cs",
-              "ToolTip": "C:\\Users\\pc\\source\\repos\\Employee Attendance Api\\Controllers\\AdminController.cs*",
-              "RelativeToolTip": "Controllers\\AdminController.cs*",
-              "ViewState": "AgIAABAAAAAAAAAAAAAowBYAAAAAAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\pc\\source\\repos\\Employee Attendance Api\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "Controllers\\AdminController.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAAACoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-11T14:31:51.387Z",
               "EditorCaption": ""
