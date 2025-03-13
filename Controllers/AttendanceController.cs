@@ -27,7 +27,12 @@ namespace Employee_Attendance_Api.Controllers
             _context.Munkaorak.Add(munkaora);
             await _context.SaveChangesAsync();
 
-            return Ok("Bejelentkezés rögzítve!");
+            return Ok(new
+            {
+                Message = "Bejelentkezés rögzítve!",
+                DolgozoId = munkaora.DolgozoId,
+                BelepesIdo = munkaora.BelepesIdo
+            });
         }
 
         [HttpPost("check-out")]

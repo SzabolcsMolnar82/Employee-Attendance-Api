@@ -47,7 +47,9 @@ namespace Employee_Attendance_Api.Controllers
 
             return Ok(new 
             { 
-                Token = tokenHandler.WriteToken(token), 
+                Token = tokenHandler.WriteToken(token),
+                DolgozoId = dolgozo.Id,
+                Nev = dolgozo.Nev,
                 IsAdmin = dolgozo.IsAdmin
             
             
