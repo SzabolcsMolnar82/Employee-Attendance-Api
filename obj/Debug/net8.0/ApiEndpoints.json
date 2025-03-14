@@ -49,6 +49,22 @@
   },
   {
     "ContainingType": "Employee_Attendance_Api.Controllers.AttendanceController",
+    "Method": "GetAttendance",
+    "RelativePath": "api/Attendance/{dolgozoId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dolgozoId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Employee_Attendance_Api.Controllers.AttendanceController",
     "Method": "CheckIn",
     "RelativePath": "api/Attendance/check-in",
     "HttpMethod": "POST",
@@ -75,6 +91,22 @@
         "Name": "dolgozoId",
         "Type": "System.Int32",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Employee_Attendance_Api.Controllers.AttendanceController",
+    "Method": "GetMonthlyWork",
+    "RelativePath": "api/Attendance/monthly-work/{dolgozoId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dolgozoId",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
