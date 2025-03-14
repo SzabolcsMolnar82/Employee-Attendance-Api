@@ -1,1 +1,1 @@
-admin bejelentkezés: felhazsnálónév: admin2, jelszó: 1234
+admin bejelentkezés: felhasználónév: admin2, jelszó: 1234
