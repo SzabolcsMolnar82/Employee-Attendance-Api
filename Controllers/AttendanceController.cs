@@ -93,33 +93,14 @@ namespace Employee_Attendance_Api.Controllers
             return Ok(new { Message = "Kijelentkezés rögzítve!", LedolgozottIdoPerc = ledolgozottIdoPerc });
         }
 
-
-        /*
-        //Dolgozó befejezi a munkát
-        [HttpPost("check-out")]
-        public async Task<IActionResult> CheckOut(int dolgozoId)
-        {
-            var munkaora = await _context.Munkaorak.FirstOrDefaultAsync(m => m.DolgozoId == dolgozoId && m.KilepesIdo == null);
-            if (munkaora == null)
-            {
-                return NotFound("Nincs aktív műszak!");
-            }
-
-            munkaora.KilepesIdo = DateTime.Now;
-            await _context.SaveChangesAsync();
-
-            return Ok("Kijelentkezés rögzítve!");
-        }
-        */
-
+        //Napi munka lekérdezése
         [HttpGet("{dolgozoId}")]
         public async Task<IActionResult> GetAttendance(int dolgozoId)
         {
-            Console.WriteLine($"🔍 getAttendance hívás dolgozoId: {dolgozoId}");
+            var ma = DateTime.Today;
 
-            // Lekérjük a dolgozóhoz tartozó jelenlét adatokat, idő szerint csökkenő sorrendben
             var jelenletek = await _context.Munkaorak
-                .Where(m => m.DolgozoId == dolgozoId)
+                .Where(m => m.DolgozoId == dolgozoId && m.BelepesIdo.Date == ma)
                 .OrderByDescending(m => m.BelepesIdo)
                 .Select(m => new
                 {
@@ -132,14 +113,10 @@ namespace Employee_Attendance_Api.Controllers
 
             if (!jelenletek.Any())
             {
-                Console.WriteLine($"⚠️ Nincs jelenlét adat ehhez a dolgozóhoz! ({dolgozoId})");
-                return NotFound(new { Message = "Nincs jelenlét adat ehhez a dolgozóhoz!" });
+                return NotFound(new { Message = "Nincs mai jelenlét ehhez a dolgozóhoz!" });
             }
 
-            Console.WriteLine($"📥 {jelenletek.Count} jelenlét adat betöltve dolgozóhoz: {dolgozoId}");
-
             return Ok(jelenletek);
-
         }
 
 
@@ -171,39 +148,91 @@ namespace Employee_Attendance_Api.Controllers
             });
         }
 
-
-
-
-
-
-
-
-
-
-
-        /*
-        [HttpGet("monthly-work/{dolgozoId}")]
-        public async Task<IActionResult> GetMonthlyWork(int dolgozoId)
-        {
-            var haviMunka = await _context.HaviMunka
-                .Where(h => h.DolgozoId == dolgozoId && h.Datum.Month == DateTime.Now.Month)
-                .Select(h => new
-                {
-                    h.Datum,
-                    h.LedolgozottIdoPerc
-                })
-                .ToListAsync();
-
-            var totalDaysWorked = haviMunka.Count;
-
-            return Ok(new
-            {
-                Days = haviMunka,
-                TotalDaysWorked = totalDaysWorked
-            });
-        }
-        */
-
-
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+[HttpGet("{dolgozoId}")]
+public async Task<IActionResult> GetAttendance(int dolgozoId)
+{
+    Console.WriteLine($"🔍 getAttendance hívás dolgozoId: {dolgozoId}");
+
+    // Lekérjük a dolgozóhoz tartozó jelenlét adatokat, idő szerint csökkenő sorrendben
+    var jelenletek = await _context.Munkaorak
+        .Where(m => m.DolgozoId == dolgozoId)
+        .OrderByDescending(m => m.BelepesIdo)
+        .Select(m => new
+        {
+            m.Id,
+            m.DolgozoId,
+            BelepesIdo = m.BelepesIdo.ToString("yyyy-MM-dd HH:mm:ss"),
+            KilepesIdo = m.KilepesIdo.HasValue ? m.KilepesIdo.Value.ToString("yyyy-MM-dd HH:mm:ss") : null
+        })
+        .ToListAsync();
+
+    if (!jelenletek.Any())
+    {
+        Console.WriteLine($"⚠️ Nincs jelenlét adat ehhez a dolgozóhoz! ({dolgozoId})");
+        return NotFound(new { Message = "Nincs jelenlét adat ehhez a dolgozóhoz!" });
+    }
+
+    Console.WriteLine($"📥 {jelenletek.Count} jelenlét adat betöltve dolgozóhoz: {dolgozoId}");
+
+    return Ok(jelenletek);
+
+}
+*/
+
+/*
+[HttpGet("monthly-work/{dolgozoId}")]
+public async Task<IActionResult> GetMonthlyWork(int dolgozoId)
+{
+    var haviMunka = await _context.HaviMunka
+        .Where(h => h.DolgozoId == dolgozoId && h.Datum.Month == DateTime.Now.Month)
+        .Select(h => new
+        {
+            h.Datum,
+            h.LedolgozottIdoPerc
+        })
+        .ToListAsync();
+
+    var totalDaysWorked = haviMunka.Count;
+
+    return Ok(new
+    {
+        Days = haviMunka,
+        TotalDaysWorked = totalDaysWorked
+    });
+}
+
+
+//Dolgozó befejezi a munkát
+[HttpPost("check-out")]
+public async Task<IActionResult> CheckOut(int dolgozoId)
+{
+    var munkaora = await _context.Munkaorak.FirstOrDefaultAsync(m => m.DolgozoId == dolgozoId && m.KilepesIdo == null);
+    if (munkaora == null)
+    {
+        return NotFound("Nincs aktív műszak!");
+    }
+
+    munkaora.KilepesIdo = DateTime.Now;
+    await _context.SaveChangesAsync();
+
+    return Ok("Kijelentkezés rögzítve!");
+}
+*/
