@@ -7,6 +7,9 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Render.com 8080 port fix
+builder.WebHost.UseUrls("http://0.0.0.0:8080");
+
 //SQL szerver lehetõség
 /*
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -88,6 +91,9 @@ builder.Services.AddCors(options =>
                   .AllowAnyHeader();
         });
 });
+
+
+
 
 var app = builder.Build();
 
