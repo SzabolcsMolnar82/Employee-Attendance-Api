@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Employee Attendance Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+deaa72190e9e443a4307bde09bdf2b0a9bf2d20f")]
 [assembly: System.Reflection.AssemblyProductAttribute("Employee Attendance Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Employee Attendance Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
