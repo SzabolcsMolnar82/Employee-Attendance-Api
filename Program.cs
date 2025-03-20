@@ -10,13 +10,20 @@ var builder = WebApplication.CreateBuilder(args);
 // Render.com 8080 port fix
 builder.WebHost.UseUrls("http://0.0.0.0:8080");
 
-//SQL szerver lehetõség
-/*
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-*/
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+// Környezet ellenõrzés
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddDbContext<AppDbContext>(options =>
+        options.UseSqlite(builder.Configuration.GetConnectionString("SQLiteConnection")));
+}
+else
+{
+    // Render-en Aiven MySQL ENV-bõl
+    var mysqlConnection = builder.Configuration["MYSQL_CONNECTIONSTRING"];
+    builder.Services.AddDbContext<AppDbContext>(options =>
+        options.UseMySql(mysqlConnection, ServerVersion.AutoDetect(mysqlConnection)));
+}
+
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -24,12 +31,12 @@ builder.Services.AddSwaggerGen();
 
 
 
-//Ez kell az Authorization gombhoz 2025.03.07
+// Authorization a Swaggerhez
 builder.Services.AddSwaggerGen(c =>
 {
     c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
     {
-        Description = "Bearer {eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluMiIsInJvbGUiOiJBZG1pbiIsIm5iZiI6MTc0MTM2MTczNCwiZXhwIjoxNzQxMzY1MzM0LCJpYXQiOjE3NDEzNjE3MzR9.M6B4AWWw695LmFKXL-25xqMVS2OloJ_dVRS2bY533Nw}",
+        Description = "Bearer {token}",
         Name = "Authorization",
         In = Microsoft.OpenApi.Models.ParameterLocation.Header,
         Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
@@ -47,7 +54,7 @@ builder.Services.AddSwaggerGen(c =>
                     Id = "Bearer"
                 }
             },
-            new string[] {}
+            Array.Empty<string>()
         }
     });
 });
@@ -56,18 +63,10 @@ builder.Services.AddSwaggerGen(c =>
 
 
 
-
+// JWT Auth
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer(options =>
     {
-
-        //Teszt ahhoz hogy megfelelõ e a hash!
-        /*
-        var secretKey = "8[=5WQ#vDCA[g@p$YyFVYXEqm7*x)mS6";
-        Console.WriteLine($"Secret Key Length: {secretKey.Length}"); // Ellenõrizd, hogy 32 karakter hosszú-e!
-        Console.WriteLine($"Secret Key Base64: {Convert.ToBase64String(Encoding.UTF8.GetBytes(secretKey))}");
-        */
-
         var secretKey = builder.Configuration["JwtSettings:Secret"];
         options.TokenValidationParameters = new TokenValidationParameters
         {
@@ -75,9 +74,11 @@ builder.Services.AddAuthentication("Bearer")
             ValidateAudience = false,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("8[=5WQ#vDCA[g@p$YyFVYXEqm7*x)mS6"))
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
         };
     });
+
+
 builder.Services.AddAuthorization();
 
 //ez kell majd ahhoz hogy menjen a fetchelés a Svelte felé, utána még lentebb is van egy sor!
@@ -97,12 +98,13 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-/*
-if (app.Environment.IsDevelopment())
+// Automatikus migráció Render-en
+using (var scope = app.Services.CreateScope())
 {
-   ;
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    dbContext.Database.Migrate();
 }
-*/
+
 
 app.UseSwagger();
 app.UseSwaggerUI();

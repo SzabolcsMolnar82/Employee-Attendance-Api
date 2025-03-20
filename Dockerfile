@@ -28,14 +28,5 @@ FROM base AS final
 WORKDIR /app
 
 
-
-#Itt másoljuk be az adatbázist
-COPY ./Data/EmployeeAttendance.db ./Data/EmployeeAttendance.db
-
-
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Employee Attendance Api.dll"]
-
-
-#így tud írni olvasni az adatbázisban
-#RUN chmod -R 777 /app/Data

@@ -250,7 +250,7 @@
     "securitySchemes": {
       "Bearer": {
         "type": "http",
-        "description": "Bearer {eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluMiIsInJvbGUiOiJBZG1pbiIsIm5iZiI6MTc0MTM2MTczNCwiZXhwIjoxNzQxMzY1MzM0LCJpYXQiOjE3NDEzNjE3MzR9.M6B4AWWw695LmFKXL-25xqMVS2OloJ_dVRS2bY533Nw}",
+        "description": "Bearer {token}",
         "scheme": "Bearer"
       }
     }

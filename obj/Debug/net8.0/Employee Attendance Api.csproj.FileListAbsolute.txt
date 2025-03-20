@@ -163,4 +163,6 @@ C:\Users\pc\source\repos\Employee Attendance Api\obj\Debug\net8.0\refint\Employe
 C:\Users\pc\source\repos\Employee Attendance Api\obj\Debug\net8.0\Employee Attendance Api.pdb
 C:\Users\pc\source\repos\Employee Attendance Api\obj\Debug\net8.0\Employee Attendance Api.genruntimeconfig.cache
 C:\Users\pc\source\repos\Employee Attendance Api\obj\Debug\net8.0\ref\Employee Attendance Api.dll
+C:\Users\pc\source\repos\Employee Attendance Api\bin\Debug\net8.0\MySqlConnector.dll
+C:\Users\pc\source\repos\Employee Attendance Api\bin\Debug\net8.0\Pomelo.EntityFrameworkCore.MySql.dll
 C:\Users\pc\source\repos\Employee Attendance Api\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
