@@ -38,4 +38,4 @@ ENTRYPOINT ["dotnet", "Employee Attendance Api.dll"]
 
 
 #így tud írni olvasni az adatbázisban
-RUN chmod -R 777 /app/Data
+#RUN chmod -R 777 /app/Data
