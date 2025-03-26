@@ -8,7 +8,11 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 // Render.com 8080 port fix
-builder.WebHost.UseUrls("http://0.0.0.0:8080");
+//lokális fejlesztésnél ki kell venni ezt a portot!!!!!
+//builder.WebHost.UseUrls("http://0.0.0.0:8080");
+
+
+
 
 // Környezet ellenõrzés
 if (builder.Environment.IsDevelopment())
